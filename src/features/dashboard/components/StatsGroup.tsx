@@ -108,7 +108,7 @@ const StatsGroup = () => {
     grid gap-4 w-full min-w-0 [&>*]:min-w-0
     grid-cols-1
     min-[360px]:grid-cols-2
-    min-[510px]:grid-cols-3
+    min-[560px]:grid-cols-3
     sm:grid-cols-3
     lg:grid-cols-2
     min-[1230px]:grid-cols-3

@@ -59,28 +59,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     try {
       const response = await authAPI.login(data)
       
-      console.log('=== LOGIN RESPONSE DEBUG ===')
-      console.log('Full response:', response)
-      console.log('Token:', response.token)
-      console.log('Token type:', typeof response.token)
-      console.log('Token length:', response.token?.length)
-      console.log('User:', response.user)
-      console.log('===========================')
-      
-      // Validate token exists and is a string
       if (!response.token || typeof response.token !== 'string') {
-        console.error('❌ INVALID TOKEN:', response.token)
         throw new Error('Invalid token received from server')
       }
       
-      // Store token
       localStorage.setItem('authToken', response.token)
-      const savedToken = localStorage.getItem('authToken')
-      console.log('✅ Token saved to localStorage:', savedToken)
-      
-      // Verify token was saved correctly
+      const savedToken = localStorage.getItem('authToken')   
+    
       if (savedToken !== response.token) {
-        console.error('❌ TOKEN MISMATCH! Saved:', savedToken, 'Expected:', response.token)
         throw new Error('Token storage failed')
       }
       
@@ -97,23 +83,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }
 
   const register = async (data: RegisterData) => {
-    console.log('=== AUTH CONTEXT REGISTER ===')
-    console.log('Data received by AuthContext:', data)
-    console.log('Data keys:', Object.keys(data))
-    console.log('fullName:', data.fullName)
-    console.log('email:', data.email)
-    console.log('=============================')
+
     
     try {
       const response = await authAPI.register(data)
       
-      console.log('Token received from API:', response.token)
-      
-      // Store token
       localStorage.setItem('authToken', response.token)
-      console.log('Token saved to localStorage:', localStorage.getItem('authToken'))
+  
       
-      // Set user data
       setUser(response.user)
       setIsAuthenticated(true)
       
